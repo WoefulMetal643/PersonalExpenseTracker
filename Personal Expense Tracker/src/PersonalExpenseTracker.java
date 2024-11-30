@@ -30,6 +30,10 @@ public class PersonalExpenseTracker{
 			return cost;
 		}
 		
+		public void addNewCategory(String expense){
+			nameExpense.add(expense);
+		}
+		
 		public ArrayList<String> arrayList() {
 			return nameExpense;
 		}
@@ -68,25 +72,24 @@ public class PersonalExpenseTracker{
 		frame.add(buttonsLayout, BorderLayout.SOUTH);
 		
 		newExpense.addActionListener(e-> {
+			frame.dispose();
 			newExpense();
-			frame.setVisible(false);
 		});
 		
 		addCategories.addActionListener(e-> {
+			frame.dispose();
 			newCategory();
-			frame.setVisible(false);
 		});
 		
 		view.addActionListener(e-> {
+			frame.dispose();
 			view();
-			frame.setVisible(false);
 		});
-		
+		System.out.println(expense.nameExpense);
 		frame.setVisible(true);
 	}
 	
-	public static void newExpense(){
-		PersonalExpenseTracker tracker = new PersonalExpenseTracker();
+	public void newExpense(){
 		JFrame frame = new JFrame("NewExpenseTracker");
 		frame.setVisible(true);
 		frame.setSize(300, 200);
@@ -115,19 +118,18 @@ public class PersonalExpenseTracker{
 		frame.add(buttonsLayout, BorderLayout.SOUTH);
 		
 		addExpense.addActionListener(e-> {
-			tracker.mainMenu();
-			frame.setVisible(false);
+			frame.dispose();
+			mainMenu();
 		});
 		
 		back.addActionListener(e-> {
-			tracker.mainMenu();
-			frame.setVisible(false);
+			frame.dispose();
+			mainMenu();
 		});
 		frame.setVisible(true);
 	}
 	
-	public static void newCategory(){
-		PersonalExpenseTracker tracker = new PersonalExpenseTracker();
+	public void newCategory(){
 		JFrame frame = new JFrame("NewCategory");
 		frame.setVisible(true);
 		frame.setSize(300, 200);
@@ -156,19 +158,22 @@ public class PersonalExpenseTracker{
 		frame.add(buttonsLayout, BorderLayout.SOUTH);
 		
 		addExpense.addActionListener(e-> {
-			tracker.mainMenu();
-			frame.setVisible(false);
+			String newCategory = text.getText();
+			if (!newCategory.isEmpty()) {
+                expense.addNewCategory(newCategory);
+            }
+			frame.dispose();
+			mainMenu();
 		});
 		
 		back.addActionListener(e-> {
-			tracker.mainMenu();
-			frame.setVisible(false);
+			frame.dispose();
+			mainMenu();
 		});
 		frame.setVisible(true);
 	}
 	
-	public static void view(){
-		PersonalExpenseTracker tracker = new PersonalExpenseTracker();
+	public void view(){
 		JFrame frame = new JFrame("ViewExpense");
 		frame.setVisible(true);
 		frame.setSize(300, 200);
@@ -180,8 +185,8 @@ public class PersonalExpenseTracker{
 		frame.add(back, BorderLayout.SOUTH);
 		
 		back.addActionListener(e-> {
-			tracker.mainMenu();
-			frame.setVisible(false);
+			frame.dispose();
+			mainMenu();
 		});
 		
 		frame.setVisible(true);
